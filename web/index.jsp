@@ -1,0 +1,1 @@
+<a href="${pageContext.request.contextPath}/adminServlet?method=getPage"> sss</a>
