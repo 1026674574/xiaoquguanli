@@ -33,4 +33,7 @@ public class adminServlet extends HttpServlet {
     protected void getPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request,response);
     }
+    protected void getAdminList(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
+
+    }
 }
