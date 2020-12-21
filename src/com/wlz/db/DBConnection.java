@@ -15,8 +15,6 @@ public class DBConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("JDBC:mysql:///小区物业管理?serverTimezone=GMT%2B8", "root", "6107015");
-
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

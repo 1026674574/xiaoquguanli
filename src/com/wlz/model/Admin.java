@@ -3,9 +3,18 @@ package com.wlz.model;
 public class Admin {
     private int ad_id;
     private String ad_username;
-    private String password;
-    private String idcar;
-    private String truename;
+    private String ad_password;
+    private String ad_idcar;
+    private String ad_truename;
+    private String ad_phone;
+
+    public String getAd_phone() {
+        return ad_phone;
+    }
+
+    public void setAd_phone(String ad_phone) {
+        this.ad_phone = ad_phone;
+    }
 
     public int getAd_id() {
         return ad_id;
@@ -23,27 +32,27 @@ public class Admin {
         this.ad_username = ad_username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAd_password() {
+        return ad_password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAd_password(String ad_password) {
+        this.ad_password = ad_password;
     }
 
-    public String getIdcar() {
-        return idcar;
+    public String getAd_idcar() {
+        return ad_idcar;
     }
 
-    public void setIdcar(String idcar) {
-        this.idcar = idcar;
+    public void setAd_idcar(String ad_idcar) {
+        this.ad_idcar = ad_idcar;
     }
 
-    public String getTruename() {
-        return truename;
+    public String getAd_truename() {
+        return ad_truename;
     }
 
-    public void setTruename(String truename) {
-        this.truename = truename;
+    public void setAd_truename(String ad_truename) {
+        this.ad_truename = ad_truename;
     }
 }

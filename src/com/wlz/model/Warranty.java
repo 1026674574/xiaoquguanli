@@ -1,6 +1,6 @@
-package com.wlz;
+package com.wlz.model;
 
-public class warranty {
+public class Warranty {
     private int wa_id;
     private int us_id;
     private String wa_text;
