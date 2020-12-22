@@ -30,11 +30,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${admin.name}</span>
+                <i class="glyphicon glyphicon-user"></i>
+                <span class="hidden-sm hidden-xs"> ${sessionScope.admin.ad_truename}
+                </span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">

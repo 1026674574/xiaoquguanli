@@ -1,7 +1,7 @@
 package com.wlz.servlet;
 
 import com.wlz.dao.AdminDaoImpl;
-import com.wlz.dao.impl.AdminDAO;
+import com.wlz.dao.impl.AdminDao;
 import com.wlz.model.Admin;
 
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "AdminServlet" ,urlPatterns = "/adminServlet")
 public class adminServlet extends HttpServlet {
-    AdminDAO adminDAO = new AdminDaoImpl();
+    AdminDao adminDAO = new AdminDaoImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         String methodName = request.getParameter("method");
         try {
@@ -58,7 +58,7 @@ public class adminServlet extends HttpServlet {
         }
         HttpSession session = request.getSession();
         session.setAttribute("admin",admin);
-        response.sendRedirect("index.jsp");
+        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
 
     }
 }

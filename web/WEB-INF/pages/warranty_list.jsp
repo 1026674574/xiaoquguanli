@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: asus1
-  Date: 2020/12/19
-  Time: 14:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +10,7 @@
     <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
-    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
-
+    <link id="bs-css" href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/charisma-app.css" rel="stylesheet">
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
@@ -134,7 +127,6 @@
                             </div>
                         </div>
                         <div class="box-content">
-
                             <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                                 <thead>
                                 <a class="btn btn-success" href="maintain/maintain-add.jsp">
@@ -149,27 +141,25 @@
                                     <th>房门号</th>
                                     <th>报修人</th>
                                     <th>状态</th>
+                                    <th>处理结果</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="warranty" items="${warrantys}" >
+                                <c:forEach var="warranty" items="${requestScope.warrantys}" >
                                     <tr>
-                                        <td>2020-03-23</td>
-                                        <td>下水道</td>
-                                        <td>已完成</td>
-                                        <td>B3433</td>
-                                        <td>2020-04-23</td>
-                                        <td>￥30</td>
-                                        <td>￥30</td>
-                                        <td>通下水道</td>
-                                        <td>###</td>
+                                        <td>${warranty.wa_datetime}</td>
+                                        <td>${warranty.wa_text}</td>
+                                        <td>${warranty.userInfo.house.ho_dong}-${warranty.userInfo.house.ho_dan}-${warranty.userInfo.house.ho_hao}</td>
+                                        <td>${warranty.userInfo.us_truename}</td>
+                                        <td>${warranty.wa_state}</td>
+                                        <td>${warranty.wa_back}</td>
                                         <td class="center">
-                                            <a class="btn btn-info" href="main?action=findById&id=${maintain.id}">
+                                            <a class="btn btn-info" href="warrantyServlet?method=getWarranty&id=${warranty.wa_id}">
                                                 <i class="glyphicon glyphicon-edit icon-white"></i>
-                                                编&ensp;辑
+                                                处&ensp;理
                                             </a>
-                                            <a class="btn btn-danger" href="#" data-href="main?action=maintainDelete&id=${maintain.id}" data-toggle="modal" data-target="#myModal">
+                                            <a class="btn btn-danger" href="#" data-href="main?action=maintainDelete&id=${warranty.wa_id}" data-toggle="modal" data-target="#myModal">
                                                 <i class="glyphicon glyphicon-trash icon-white"></i>
                                                 删&ensp;除
                                             </a>

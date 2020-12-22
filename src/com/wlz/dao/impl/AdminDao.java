@@ -4,7 +4,7 @@ import com.wlz.model.Admin;
 
 import java.util.ArrayList;
 
-public interface AdminDAO {
+public interface AdminDao {
     Admin login(String username, String password);
     ArrayList<Admin> getAdminList();
 }

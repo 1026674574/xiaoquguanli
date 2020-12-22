@@ -5,8 +5,17 @@ public class UserInfo {
     private  String us_name;
     private String us_password;
     private String us_truename;
-    private String is_idcar;
+    private String us_idcar;
     private int ho_id;
+    private House house;
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 
     public int getUs_id() {
         return us_id;
@@ -40,12 +49,12 @@ public class UserInfo {
         this.us_truename = us_truename;
     }
 
-    public String getIs_idcar() {
-        return is_idcar;
+    public String getUs_idcar() {
+        return us_idcar;
     }
 
-    public void setIs_idcar(String is_idcar) {
-        this.is_idcar = is_idcar;
+    public void setUs_idcar(String us_idcar) {
+        this.us_idcar = us_idcar;
     }
 
     public int getHo_id() {

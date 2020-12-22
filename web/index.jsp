@@ -1,5 +1,5 @@
 <%
-    response.sendRedirect(request.getContextPath()+"/adminServlet?method=getPage&page=index");
+    response.sendRedirect(request.getContextPath()+"/adminServlet?method=getPage&page=login");
 
 
 
