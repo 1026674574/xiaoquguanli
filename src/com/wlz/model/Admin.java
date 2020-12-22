@@ -8,6 +8,13 @@ public class Admin {
     private String ad_truename;
     private String ad_phone;
 
+    public Admin(String ad_truename) {
+        this.ad_truename = ad_truename;
+    }
+
+    public Admin() {
+    }
+
     public String getAd_phone() {
         return ad_phone;
     }

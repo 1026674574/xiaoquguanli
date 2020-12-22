@@ -3,11 +3,31 @@ package com.wlz.model;
 public class Warranty {
     private int wa_id;
     private int us_id;
+    private int ad_id;
     private String wa_text;
     private  String wa_datetime;
     private  int wa_state;
     private String wa_back;
     private UserInfo userInfo;
+    private Admin admin;
+
+    public int getAd_id() {
+        return ad_id;
+    }
+
+    public void setAd_id(int ad_id) {
+        this.ad_id = ad_id;
+    }
+
+    public Admin getAdmin() {
+        if (this.admin==null)
+            this.admin = new Admin("无");
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
     public UserInfo getUserInfo() {
         return userInfo;

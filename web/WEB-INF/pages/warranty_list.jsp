@@ -141,6 +141,7 @@
                                     <th>房门号</th>
                                     <th>报修人</th>
                                     <th>状态</th>
+                                    <th>处理人</th>
                                     <th>处理结果</th>
                                     <th>操作</th>
                                 </tr>
@@ -153,6 +154,7 @@
                                         <td>${warranty.userInfo.house.ho_dong}-${warranty.userInfo.house.ho_dan}-${warranty.userInfo.house.ho_hao}</td>
                                         <td>${warranty.userInfo.us_truename}</td>
                                         <td>${warranty.wa_state}</td>
+                                        <td>${warranty.admin.ad_truename}</td>
                                         <td>${warranty.wa_back}</td>
                                         <td class="center">
                                             <a class="btn btn-info" href="warrantyServlet?method=getWarranty&id=${warranty.wa_id}">

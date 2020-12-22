@@ -72,4 +72,34 @@ public class AdminDaoImpl implements AdminDao {
         }
         return null;
     }
+
+    @Override
+    public Admin getAdmin(int id) {
+        Connection connection = db.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement("select * from admin where ad_id = ? ");
+            preparedStatement.setInt(1,id);
+            resultSet=preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+                Admin admin = new Admin();
+                admin.setAd_id(resultSet.getInt("ad_id"));
+                admin.setAd_idcar(resultSet.getString("ad_idcar"));
+                admin.setAd_password(resultSet.getString("ad_password"));
+                admin.setAd_username(resultSet.getString("ad_username"));
+                admin.setAd_truename(resultSet.getString("ad_truename"));
+                admin.setAd_phone(resultSet.getString("ad_phone"));
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+                return admin;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new Admin("无");
+    }
 }

@@ -1,4 +1,5 @@
 package com.wlz.dao;
+import com.wlz.dao.impl.AdminDao;
 import com.wlz.dao.impl.UserInfoDao;
 import com.wlz.dao.impl.WarrantyDao;
 import com.wlz.db.DBConnection;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class WarrantyDaoImpl implements WarrantyDao {
     DBConnection db = new DBConnection();
     UserInfoDao userInfoDao = new UserInfoDaoImpl();
+    AdminDao adminDao = new AdminDaoImpl();
     @Override
     public ArrayList<Warranty> getList() {
         ArrayList<Warranty> warranties = new ArrayList<>();
@@ -30,6 +32,7 @@ public class WarrantyDaoImpl implements WarrantyDao {
                 warranty.setWa_state(resultSet.getInt("wa_state"));
                 warranty.setWa_text(resultSet.getString("wa_text"));
                 warranty.setUserInfo(userInfoDao.getUser(warranty.getUs_id()));
+                warranty.setAdmin(adminDao.getAdmin(resultSet.getInt("ad_id")));
                 warranties.add(warranty);
             }
             resultSet.close();
