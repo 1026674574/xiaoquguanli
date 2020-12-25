@@ -2,6 +2,7 @@ package com.wlz.servlet;
 
 import com.wlz.dao.WarrantyDaoImpl;
 import com.wlz.dao.impl.WarrantyDao;
+import com.wlz.model.Admin;
 import com.wlz.model.Warranty;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ public class warrantyServlet extends HttpServlet {
 
     WarrantyDao warrantyDao = new WarrantyDaoImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String methodName = request.getParameter("method");
         try {
             // 利用反射获取方法
@@ -52,12 +54,14 @@ public class warrantyServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/warranty_edit.jsp").forward(request,response);
     }
     protected void updateWarranty(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String idstr = request.getParameter("id");
         String statusstr = request.getParameter("status");
         String back = request.getParameter("back");
         int status = Integer.parseInt(statusstr);
         int id= Integer.parseInt(idstr);
-        warrantyDao.updateWarranty(id,status,back);
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        warrantyDao.updateWarranty(id,status,back,admin.getAd_id());
         getList(request,response);
 
     }

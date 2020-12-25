@@ -9,6 +9,24 @@ public class Property {
     private int po_month;
     private String po_start;
     private String po_end;
+    private int po_state;
+    private House house;
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
+
+    public int getPo_state() {
+        return po_state;
+    }
+
+    public void setPo_state(int po_state) {
+        this.po_state = po_state;
+    }
 
     public int getPo_id() {
         return po_id;

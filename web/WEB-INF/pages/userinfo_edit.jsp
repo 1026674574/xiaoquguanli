@@ -1,28 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: asus1
-  Date: 2020/12/25
-  Time: 8:56
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <!--
-        ===
-        This comment should NOT be removed.
-
-        Charisma v2.0.0
-
-        Copyright 2012-2014 Muhammad Usman
-        Licensed under the Apache License v2.0
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        http://usman.it
-        http://twitter.com/halalit_usman
-        ===
-    -->
     <meta charset="utf-8">
     <title>编辑:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,7 +56,7 @@
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${sessionScope.admin.ad_truename}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${admin.name}</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -99,12 +78,14 @@
 
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">功能</li>
                         <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
                         <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
                         <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
                         <li><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li class="active"><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
+                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        </li>
 
                     </ul>
 
@@ -128,10 +109,10 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.jsp">首页</a>
+                        <a href="index.html">首页</a>
                     </li>
                     <li>
-                        <a href="house?action=houseList">房产信息</a>
+                        <a href="custom?action=customAccountList">业主信息</a>
                     </li>
                     <li>
                         <a href="#">编辑</a>
@@ -153,59 +134,38 @@
                             </div>
                         </div>
                         <div class="box-content">
-                            <form role="form" action="houseServlet?method=updateHouse" data-toggle="validator modal" method="post">
+                            <form role="form" data-toggle="validator" action="userInfoServlet?method=updateUser" method="post">
                                 <div class="form-group">
                                     <div class="input-group col-md-3">
-                                        <label class="control-label">栋</label>
-                                        <input type="text" class="form-control" name="dong" value ="${requestScope.house.ho_dong }"required>
+                                        <label class="control-label" >用户名</label>
+                                        <input type="text" class="form-control" name="username" value="${requestScope.user.us_name}" >
                                         <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">单元</label>
-                                        <input type="text" class="form-control" name="dan" value ="${requestScope.house.ho_dan}"required>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">号</label>
-                                        <input type="text" class="form-control" name="hao" value ="${requestScope.house.ho_hao}" required>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label" >类型*</label>
-                                        <select data-rel="chosen" name="type">
-                                            <option value="${requestScope.house.ho_type }">${requestScope.house.ho_type }</option>
-                                            <option value="独栋">独栋</option>
-                                            <option value="多层">多层</option>
-                                            <option value="小高层">小高层</option>
-                                            <option value="高层">高层</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label" >面积</label>
-                                        <input type="text" class="form-control" name="area" value ="${requestScope.house.ho_area }" required>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">出售状况*</label>
-                                        <select data-rel="chosen" name="state">
-                                            <option value="${requestScope.house.ho_state}">${requestScope.house.ho_state }</option>
-                                            <option value="0">待售</option>
-                                            <option value="1">已售</option>
-                                        </select>
                                     </div>
                                 </div>
 
-                                <input type="hidden" name="id"  value="${requestScope.house.ho_id}">
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">真名</label>
+                                        <input type="text" class="form-control" name="truename" value="${requestScope.user.us_truename}">
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">密码</label>
+                                        <input type="password" class="form-control" name="password" value="${requestScope.user.us_password}">
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">身份证</label>
+                                        <input type="text" class="form-control" name="idcar" value="${requestScope.user.us_idcar}">
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="id"  value="${requestScope.user.us_id}">
                                 <button type="submit" class="btn btn-info">提&ensp;交&ensp;</button>
                             </form>
 
@@ -253,9 +213,11 @@
     </footer>
 
 </div><!--/.fluid-container-->
+
 <!-- external javascript -->
 <script src="${pageContext.request.contextPath}/js/validator.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <!-- library for cookie management -->
 <script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 <!-- calender plugin -->
@@ -290,6 +252,5 @@
 
 </body>
 </html>
-
 
 

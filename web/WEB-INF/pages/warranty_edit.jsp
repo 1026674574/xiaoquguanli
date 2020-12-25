@@ -49,7 +49,7 @@
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${admin.name}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${sessionScope.admin.ad_truename}</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -67,11 +67,12 @@
                     <div class="nav-sm nav nav-stacked"></div>
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li class="nav-header">功能</li>
-                            <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
-                            <li><a class="ajax-link" href="admin?action=adminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                            <li class="active"><a class="ajax-link" href="main?action=maintainList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                            <li><a class="ajax-link" href="custom?action=customAccountList"><i class="glyphicon glyphicon-user"></i><span> &ensp;业&ensp;主&ensp;信&ensp;息</span></a>
-                            <li><a class="ajax-link" href="house?action=houseList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
+                        <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
+                        <li class="active"><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
+                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
+                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>>
                         </li>
                     </ul>
                 </div>

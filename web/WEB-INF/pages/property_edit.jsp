@@ -1,28 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: asus1
-  Date: 2020/12/25
-  Time: 8:56
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <!--
-        ===
-        This comment should NOT be removed.
-
-        Charisma v2.0.0
-
-        Copyright 2012-2014 Muhammad Usman
-        Licensed under the Apache License v2.0
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        http://usman.it
-        http://twitter.com/halalit_usman
-        ===
-    -->
     <meta charset="utf-8">
     <title>编辑:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +35,7 @@
     <![endif]-->
 
     <!-- The fav icon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
 
 </head>
 
@@ -77,7 +56,7 @@
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${sessionScope.admin.ad_truename}</span>
+                <span class="hidden-sm hidden-xs">admin</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -102,9 +81,10 @@
                         <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
                         <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
                         <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
+                        <li class="active"><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
                         <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        </li>
 
                     </ul>
 
@@ -131,7 +111,7 @@
                         <a href="index.jsp">首页</a>
                     </li>
                     <li>
-                        <a href="house?action=houseList">房产信息</a>
+                        <a href="house?action=houseList">物业缴费</a>
                     </li>
                     <li>
                         <a href="#">编辑</a>
@@ -143,69 +123,61 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-edit"></i> 编辑</h2>
+                            <h2> 编辑</h2>
 
                             <div class="box-icon">
-                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                        class="glyphicon glyphicon-chevron-up"></i></a>
-                                <a href="#" class="btn btn-close btn-round btn-default"><i
-                                        class="glyphicon glyphicon-remove"></i></a>
+                                <a href="#" class="btn btn-minimize btn-round btn-default"></a>
+                                <a href="#" class="btn btn-close btn-round btn-default"></a>
                             </div>
                         </div>
                         <div class="box-content">
-                            <form role="form" action="houseServlet?method=updateHouse" data-toggle="validator modal" method="post">
+                            <form role="form" action="propertyServlet?method=updateProperty" data-toggle="validator modal" method="post">
                                 <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">栋</label>
-                                        <input type="text" class="form-control" name="dong" value ="${requestScope.house.ho_dong }"required>
-                                        <span class="help-block with-errors"></span>
+                                <label class="control-label">物业服务费</label>
+                                <div class="input-group date form_date col-md-3" >
+                                    <input class="form-control" name="service" type="text" value="${requestScope.property.po_sevice}" >
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label class="control-label">物业管理费</label>
+                                    <div class="input-group date form_date col-md-3" >
+                                        <input class="form-control" name="admin" type="text" value="${requestScope.property.po_admin}" >
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="input-group col-md-3">
+                                    <label class="control-label">年份</label>
+                                    <input type="text" class="form-control" name="year" value="${requestScope.property.po_year}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                <div class="input-group col-md-3">
+                                    <label class="control-label">月份</label>
+                                    <input type="text" class="form-control" name="mont" ${requestScope.property.po_month}>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                <div class="input-group col-md-3">
+                                    <label class="control-label">缴费状态</label><br>
+                                    <select data-rel="chosen" name="state">
+                                        <option value="0">已缴费</option>
+                                        <option value="1">未交费</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">开始时间</label>
+                                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" name="stdate" type="text" value="2020-11-21">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">单元</label>
-                                        <input type="text" class="form-control" name="dan" value ="${requestScope.house.ho_dan}"required>
-                                        <span class="help-block with-errors"></span>
+                                    <label class="control-label">截止时间</label>
+                                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" name="endate" type="text" value="2020-12-01">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">号</label>
-                                        <input type="text" class="form-control" name="hao" value ="${requestScope.house.ho_hao}" required>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label" >类型*</label>
-                                        <select data-rel="chosen" name="type">
-                                            <option value="${requestScope.house.ho_type }">${requestScope.house.ho_type }</option>
-                                            <option value="独栋">独栋</option>
-                                            <option value="多层">多层</option>
-                                            <option value="小高层">小高层</option>
-                                            <option value="高层">高层</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label" >面积</label>
-                                        <input type="text" class="form-control" name="area" value ="${requestScope.house.ho_area }" required>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group col-md-3">
-                                        <label class="control-label">出售状况*</label>
-                                        <select data-rel="chosen" name="state">
-                                            <option value="${requestScope.house.ho_state}">${requestScope.house.ho_state }</option>
-                                            <option value="0">待售</option>
-                                            <option value="1">已售</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <input type="hidden" name="id"  value="${requestScope.house.ho_id}">
+                                <input type="hidden" name="id"  value="${requestScope.property.po_id}">
                                 <button type="submit" class="btn btn-info">提&ensp;交&ensp;</button>
                             </form>
 
@@ -253,43 +225,44 @@
     </footer>
 
 </div><!--/.fluid-container-->
+
 <!-- external javascript -->
-<script src="${pageContext.request.contextPath}/js/validator.min.js"></script>
-<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <!-- library for cookie management -->
-<script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <!-- calender plugin -->
-<script src='${pageContext.request.contextPath}/bower_components/moment/min/moment.min.js'></script>
-<script src='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src='bower_components/moment/min/moment.min.js'></script>
+<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
 <!-- data table plugin -->
-<script src='${pageContext.request.contextPath}/js/jquery.dataTables.min.js'></script>
+<script src='js/jquery.dataTables.min.js'></script>
 
 <!-- select or dropdown enhancer -->
-<script src="${pageContext.request.contextPath}/bower_components/chosen/chosen.jquery.min.js"></script>
+<script src="bower_components/chosen/chosen.jquery.min.js"></script>
 <!-- plugin for gallery image view -->
-<script src="${pageContext.request.contextPath}/bower_components/colorbox/jquery.colorbox-min.js"></script>
+<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
 <!-- notification plugin -->
-<script src="${pageContext.request.contextPath}/js/jquery.noty.js"></script>
+<script src="js/jquery.noty.js"></script>
 <!-- library for making tables responsive -->
-<script src="${pageContext.request.contextPath}/bower_components/responsive-tables/responsive-tables.js"></script>
+<script src="bower_components/responsive-tables/responsive-tables.js"></script>
 <!-- tour plugin -->
-<script src="${pageContext.request.contextPath}/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
 <!-- star rating plugin -->
-<script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
+<script src="js/jquery.raty.min.js"></script>
 <!-- for iOS style toggle switch -->
-<script src="${pageContext.request.contextPath}/js/jquery.iphone.toggle.js"></script>
+<script src="js/jquery.iphone.toggle.js"></script>
 <!-- autogrowing textarea plugin -->
-<script src="${pageContext.request.contextPath}/js/jquery.autogrow-textarea.js"></script>
+<script src="js/jquery.autogrow-textarea.js"></script>
 <!-- multiple file upload plugin -->
-<script src="${pageContext.request.contextPath}/js/jquery.uploadify-3.1.min.js"></script>
+<script src="js/jquery.uploadify-3.1.min.js"></script>
 <!-- history.js for cross-browser state change on ajax -->
-<script src="${pageContext.request.contextPath}/js/jquery.history.js"></script>
+<script src="js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
-<script src="${pageContext.request.contextPath}/js/charisma.js"></script>
+<script src="js/charisma.js"></script>
 
 
 </body>
 </html>
 
-
-
+</html>

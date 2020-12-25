@@ -9,7 +9,7 @@ public interface WarrantyDao {
 
     Warranty getWarranty(int id);
 
-    void updateWarranty(int id,int state,String text);
+    void updateWarranty(int id,int state,String text,int ad_id);
 
     void deleteWarranty(int id);
 }

@@ -75,14 +75,15 @@ public class WarrantyDaoImpl implements WarrantyDao {
     }
 
     @Override
-    public void updateWarranty(int id,int state,String text) {
+    public void updateWarranty(int id,int state,String text,int ad_id) {
         Connection connection = db.getConnection();
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement= connection.prepareStatement("update warranty set wa_state = ?, wa_back = ? where wa_id = ?");
+            preparedStatement= connection.prepareStatement("update warranty set wa_state = ?, wa_back = ? ,ad_id = ? where wa_id = ?");
             preparedStatement.setInt(1,state);
             preparedStatement.setString(2,text);
-            preparedStatement.setInt(3,id);
+            preparedStatement.setInt(3,ad_id);
+            preparedStatement.setInt(4,id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
