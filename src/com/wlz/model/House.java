@@ -6,6 +6,24 @@ public class House {
     private  int ho_dan;
     private  int ho_hao;
     private  int ho_area;
+    private int ho_state;
+    private String ho_type;
+
+    public String getHo_type() {
+        return ho_type;
+    }
+
+    public void setHo_type(String ho_type) {
+        this.ho_type = ho_type;
+    }
+
+    public int getHo_state() {
+        return ho_state;
+    }
+
+    public void setHo_state(int ho_state) {
+        this.ho_state = ho_state;
+    }
 
     public int getHo_id() {
         return ho_id;

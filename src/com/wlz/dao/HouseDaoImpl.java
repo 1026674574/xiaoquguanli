@@ -30,6 +30,8 @@ public class HouseDaoImpl implements HouseDao {
                     house.setHo_dong(resultSet.getInt("ho_dong"));
                     house.setHo_hao(resultSet.getInt("ho_hao"));
                     house.setHo_area(resultSet.getInt("ho_area"));
+                    house.setHo_state(resultSet.getInt("ho_state"));
+                    house.setHo_type(resultSet.getString("ho_type"));
                 }
                 resultSet.close();
                 preparedStatement.close();
@@ -60,6 +62,8 @@ public class HouseDaoImpl implements HouseDao {
                 house.setHo_dong(resultSet.getInt("ho_dong"));
                 house.setHo_hao(resultSet.getInt("ho_hao"));
                 house.setHo_area(resultSet.getInt("ho_area"));
+                house.setHo_state(resultSet.getInt("ho_state"));
+                house.setHo_type(resultSet.getString("ho_type"));
                 houses.add(house);
             }
             resultSet.close();
@@ -77,17 +81,22 @@ public class HouseDaoImpl implements HouseDao {
         Connection connection = db.getConnection();
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = connection.prepareStatement("update house set ho_hao = ? , ho_dong = ?, ho_dan = ?, ho_area = ? WHERE ho_id = ?");
+            preparedStatement = connection.prepareStatement("update house set ho_hao = ? , ho_dong = ?, ho_dan = ?, ho_area = ?,ho_state= ?,ho_type = ? WHERE ho_id = ?");
             preparedStatement.setInt(1,house.getHo_hao());
             preparedStatement.setInt(2,house.getHo_dong());
             preparedStatement.setInt(3,house.getHo_dan());
             preparedStatement.setInt(4,house.getHo_area());
-            preparedStatement.setInt(5,house.getHo_id());
+            preparedStatement.setInt(5,house.getHo_state());
+            preparedStatement.setString(6,house.getHo_type());
+            preparedStatement.setInt(7,house.getHo_id());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void deleteHouse(int id){
+
     }
 }

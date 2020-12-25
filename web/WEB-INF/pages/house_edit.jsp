@@ -1,10 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: asus1
+  Date: 2020/12/25
+  Time: 8:56
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +23,8 @@
         http://twitter.com/halalit_usman
         ===
     -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>房产信息:物业管理系统</title>
+    <meta charset="utf-8">
+    <title>编辑:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
@@ -70,7 +71,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
@@ -105,7 +106,9 @@
                         <li><a class="ajax-link" href="coustom_list.html"><i class="glyphicon glyphicon-user"></i><span> &ensp;业&ensp;主&ensp;信&ensp;息</span></a>
                         <li class="active"><a class="ajax-link" href="house_list.html"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
                         </li>
+
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -115,6 +118,7 @@
         <noscript>
             <div class="alert alert-block col-md-12">
                 <h4 class="alert-heading">Warning!</h4>
+
                 <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
                     enabled to use this site.</p>
             </div>
@@ -130,6 +134,9 @@
                     <li>
                         <a href="house?action=houseList">房产信息</a>
                     </li>
+                    <li>
+                        <a href="#">编辑</a>
+                    </li>
                 </ul>
             </div>
 
@@ -137,70 +144,83 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-list-alt"></i> 房产信息</h2>
+                            <h2><i class="glyphicon glyphicon-edit"></i> 编辑</h2>
 
                             <div class="box-icon">
                                 <a href="#" class="btn btn-minimize btn-round btn-default"><i
                                         class="glyphicon glyphicon-chevron-up"></i></a>
-                                <a href="#" class="btn btn-close btn-round btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a href="#" class="btn btn-close btn-round btn-default"><i
+                                        class="glyphicon glyphicon-remove"></i></a>
                             </div>
                         </div>
                         <div class="box-content">
+                            <form role="form" action="houseServlet?method=updateHouse" data-toggle="validator modal" method="post">
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">栋</label>
+                                        <input type="text" class="form-control" name="dong" value ="${requestScope.house.ho_dong }"required>
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">单元</label>
+                                        <input type="text" class="form-control" name="dan" value ="${requestScope.house.ho_dan}"required>
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">号</label>
+                                        <input type="text" class="form-control" name="hao" value ="${requestScope.house.ho_hao}" required>
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label" >类型*</label>
+                                        <select data-rel="chosen" name="type">
+                                            <option value="${requestScope.house.ho_type }">${requestScope.house.ho_type }</option>
+                                            <option value="独栋">独栋</option>
+                                            <option value="多层">多层</option>
+                                            <option value="小高层">小高层</option>
+                                            <option value="高层">高层</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label" >面积</label>
+                                        <input type="text" class="form-control" name="area" value ="${requestScope.house.ho_area }" required>
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-md-3">
+                                        <label class="control-label">出售状况*</label>
+                                        <select data-rel="chosen" name="state">
+                                            <option value="${requestScope.house.ho_state}">${requestScope.house.ho_state }</option>
+                                            <option value="0">待售</option>
+                                            <option value="1">已售</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable">
-                                <thead>
-                                <a class="btn btn-success" href="house/house-add.jsp">
-                                    <i class="glyphicon glyphicon-plus icon-white"></i>
-                                    &ensp;添&ensp;加&ensp;记&ensp;录
-                                </a>
-                                <br/>
-                                <br/>
-                                <tr>
-                                    <th>栋</th>
-                                    <th>单元</th>
-                                    <th>号</th>
-                                    <th>面积</th>
-                                    <th>状态</th>
-                                    <th>类型</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="house" items="${requestScope.houses}" >
-                                    <tr>
-                                        <td>${house.ho_dong}</td>
-                                        <td>${house.ho_dan}</td>
-                                        <td>${house.ho_hao}</td>
-                                        <td>${house.ho_area}</td>
-                                        <td>${house.ho_state}</td>
-                                        <td>${house.ho_type}</td>
-                                        <td class="center">
-                                            <a class="btn btn-info" href="houseServlet?method=getHouse&id=${house.ho_id}">
-                                                <i class="glyphicon glyphicon-edit icon-white"></i>
-                                                编&ensp;辑
-                                            </a>
-                                            <a class="btn btn-danger" href="#" data-href="houseServlet?method=deleteHouse&id=${house.ho_id}" data-toggle="modal" data-target="#myModal">
-                                                <i class="glyphicon glyphicon-trash icon-white"></i>
-                                                删&ensp;除
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+                                <input type="hidden" name="id"  value="${requestScope.house.ho_id}">
+                                <button type="submit" class="btn btn-info">提&ensp;交&ensp;</button>
+                            </form>
 
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
-                <!--/span-->
+            </div>
 
-            </div><!--/row-->
 
 
             <!-- content ends -->
         </div><!--/#content.col-md-0-->
     </div><!--/fluid-row-->
+
 
 
     <hr>
@@ -212,14 +232,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>确认？</h3>
+                    <h3>确认提交</h3>
                 </div>
                 <div class="modal-body">
-                    <p>此条记录将被永久删除</p>
+                    <p>信息将被提交。</p>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
-                    <a class="btn btn-danger btn-ok">确认删除</a>
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">确定</a>
                 </div>
             </div>
         </div>
@@ -236,7 +256,7 @@
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
-
+<script src="${pageContext.request.contextPath}/js/validator.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- library for cookie management -->
@@ -245,7 +265,8 @@
 <script src='${pageContext.request.contextPath}/bower_components/moment/min/moment.min.js'></script>
 <script src='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
 <!-- data table plugin -->
-<script src="${pageContext.request.contextPath}/js/jquery.dataTables.min.js"></script>
+<script src='${pageContext.request.contextPath}/js/jquery.dataTables.min.js'></script>
+
 <!-- select or dropdown enhancer -->
 <script src="${pageContext.request.contextPath}/bower_components/chosen/chosen.jquery.min.js"></script>
 <!-- plugin for gallery image view -->
@@ -268,15 +289,10 @@
 <script src="${pageContext.request.contextPath}/js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
 <script src="${pageContext.request.contextPath}/js/charisma.js"></script>
-<script>
-    $('#myModal').on('show.bs.modal', function(e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-    });
-</script>
-
-</body>
-</html>
 
 
 </body>
 </html>
+
+
+

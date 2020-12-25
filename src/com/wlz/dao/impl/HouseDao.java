@@ -8,4 +8,5 @@ public interface HouseDao {
     House getHouse(int id);
     ArrayList<House> getList();
     void updateHouse(House house);
+    void deleteHouse(int id);
 }

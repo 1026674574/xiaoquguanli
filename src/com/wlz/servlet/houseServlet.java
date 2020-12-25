@@ -42,10 +42,27 @@ public class houseServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/house_list.jsp").forward(request,response);
     }
     protected void getHouse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
+        String idstr = request.getParameter("id");
+        int id = Integer.parseInt(idstr);
+        House house = houseDao.getHouse(id);
+        request.setAttribute("house",house);
+        request.getRequestDispatcher("/WEB-INF/pages/house_edit.jsp").forward(request,response);
     }
 
     protected void updateHouse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        House house = new House();
+        house.setHo_type(request.getParameter("type"));
+        house.setHo_area(Integer.parseInt(request.getParameter("area")));
+        house.setHo_hao(Integer.parseInt(request.getParameter("hao")));
+        house.setHo_dan(Integer.parseInt(request.getParameter("dan")));
+        house.setHo_dong(Integer.parseInt(request.getParameter("dong")));
+        house.setHo_hao(Integer.parseInt(request.getParameter("state")));
+        houseDao.updateHouse(house);
+    }
+    protected void deleteHouse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String idstr = request.getParameter("id");
+        int id = Integer.parseInt(idstr);
+        houseDao.deleteHouse(id);
 
     }
 
