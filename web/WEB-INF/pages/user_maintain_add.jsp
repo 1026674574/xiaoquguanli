@@ -1,16 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>物业缴费:物业管理系统</title>
+
+    <meta charset="utf-8">
+    <title>添加:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
-    <link id="bs-css" href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet" media="screen">
+    <link href="${pageContext.request.contextPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <link href="${pageContext.request.contextPath}/css/charisma-app.css" rel="stylesheet">
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
@@ -51,13 +52,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.admin.ad_truename}</span>
+                <span class="hidden-sm hidden-xs">admin</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -79,14 +80,14 @@
 
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
-                        <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
-                        <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                        <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li class="nav-header">功能</li>
+                        <li><a class="ajax-link" href="adminServlet?method=getPage&page=user_index"><span> &ensp;首&ensp;页</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList2"><span>&ensp;缴&ensp;费</span></a></li>
+                        <li class="active"><a class="ajax-link" href="warrantyServlet?method=getList2"><span> &ensp;报&ensp;修</span></a>
                         </li>
+
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -107,10 +108,13 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">首页</a>
+                        <a href="index.jsp">首页</a>
                     </li>
                     <li>
-                        <a href="house_list.html">物业缴费</a>
+                        <a href="usear_maintain_list.html">报修</a>
+                    </li>
+                    <li>
+                        <a href="#">添加</a>
                     </li>
                 </ul>
             </div>
@@ -119,95 +123,80 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-list-alt"></i> 物业缴费</h2>
+                            <h2>添加</h2>
+
+                            <div class="box-icon">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"></a>
+                                <a href="#" class="btn btn-close btn-round btn-default"></a>
+                            </div>
                         </div>
                         <div class="box-content">
+                            <form role="form" data-toggle="validator" action="warrantyServlet?method=addWarranty" method="post">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="input-group col-md-3">
+                                            <label class="control-label">报修情况*</label>
+                                            <textarea type="text" class="form-control" name="text" required></textarea>
+                                            <span class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">报修时间*</label>
+                                        <input class="form-control" name="sdate" id="sdate"  data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                                    </div>
 
-                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable">
-                                <thead>
-<%--                                <a class="btn btn-success" href="house/house-add.jsp">--%>
-<%--                                    <i class="glyphicon glyphicon-plus icon-white"></i>--%>
-<%--                                    &ensp;添&ensp;加&ensp;记&ensp;录--%>
-<%--                                </a>--%>
-                                <br/>
-                                <br/>
-                                <tr>
-                                    <th>房号</th>
-                                    <th>物业费</th>
-                                    <th>缴费开始时间</th>
-                                    <th>缴费截止时间</th>
-                                    <th>缴费状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="properties" items="${requestScope.properties}" >
-                                    <tr>
-                                        <td>${properties.house.ho_dong}-${properties.house.ho_dan}-${properties.house.ho_hao}</td>
-                                        <td>${properties.po_sevice}元</td>
-                                        <td>${properties.po_start}</td>
-                                        <td>${properties.po_end}</td>
-                                        <td>${properties.flag}</td>
-                                        <td class="center">
-                                            <a class="btn btn-info" href="propertyServlet?method=getProperty">
-                                                编&ensp;辑
-                                            </a>
-                                            <a class="btn btn-danger" href="#" data-href="house?action=houseDelete&id=${house.id}" data-toggle="modal" data-target="#myModal">
-                                                删&ensp;除
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
 
-                                </tbody>
-                            </table>
-                        </div>
+                        <button type="submit" class="btn btn-info">提&ensp;交&ensp;</button>
+                        </fieldset>
+                        </form>
+
                     </div>
-                </div>
-                <!--/span-->
-
-            </div><!--/row-->
-
-
-            <!-- content ends -->
-        </div><!--/#content.col-md-0-->
-    </div><!--/fluid-row-->
-
-
-    <hr>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>确认？</h3>
-                </div>
-                <div class="modal-body">
-                    <p>此条记录将被永久删除</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
-                    <a class="btn btn-danger btn-ok">确认删除</a>
                 </div>
             </div>
         </div>
+
+
+
+        <!-- content ends -->
+    </div><!--/#content.col-md-0-->
+</div><!--/fluid-row-->
+
+
+
+<hr>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>确认提交</h3>
+            </div>
+            <div class="modal-body">
+                <p>信息将被提交。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                <a href="#" class="btn btn-primary" data-dismiss="modal">确定</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://usman.it" target="_blank">Muhammad
-            Usman</a> 2012 - 2015</p>
+<footer class="row">
+    <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://usman.it" target="_blank">Muhammad
+        Usman</a> 2012 - 2015</p>
 
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
-                href="http://usman.it/free-responsive-admin-template">WZL</a></p>
-    </footer>
+    <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
+            href="http://usman.it/free-responsive-admin-template">WZL</a></p>
+</footer>
 
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
-
+<script src="js/validator.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- library for cookie management -->
@@ -216,7 +205,8 @@
 <script src='bower_components/moment/min/moment.min.js'></script>
 <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
 <!-- data table plugin -->
-<script src="js/jquery.dataTables.min.js"></script>
+<script src='js/jquery.dataTables.min.js'></script>
+
 <!-- select or dropdown enhancer -->
 <script src="bower_components/chosen/chosen.jquery.min.js"></script>
 <!-- plugin for gallery image view -->
@@ -239,13 +229,30 @@
 <script src="js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
 <script src="js/charisma.js"></script>
-<script>
-    $('#myModal').on('show.bs.modal', function(e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+<!-- datetime-->
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
     });
 </script>
-
+<script type="text/javascript">
+    sdate = document.getElementById("sdate");
+    d = new Date();
+    year = d.getUTCFullYear();
+    month = d.getMonth()+1;
+    date = d.getDate();
+    sdate.value = year+'-'+month+'-'+date;
+</script>
 </body>
 </html>
 
-
+</html>

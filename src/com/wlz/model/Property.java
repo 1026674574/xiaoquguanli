@@ -11,6 +11,15 @@ public class Property {
     private String po_end;
     private int po_state;
     private House house;
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public House getHouse() {
         return house;
@@ -25,7 +34,13 @@ public class Property {
     }
 
     public void setPo_state(int po_state) {
+
         this.po_state = po_state;
+        if (po_state==0)
+        {
+            setFlag("未缴费");
+        }
+        else setFlag("已缴费");
     }
 
     public int getPo_id() {

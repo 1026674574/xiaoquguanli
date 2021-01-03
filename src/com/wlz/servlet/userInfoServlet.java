@@ -63,4 +63,12 @@ public class userInfoServlet extends HttpServlet {
 
     }
     protected void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{}
+
+    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        UserInfo userInfo = userInfoDao.login(username, password);
+        request.getSession().setAttribute("userInfo",userInfo);
+        request.getRequestDispatcher("/WEB-INF/pages/user_index.jsp").forward(request,response);
+    }
 }

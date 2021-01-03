@@ -8,6 +8,15 @@ public class House {
     private  int ho_area;
     private int ho_state;
     private String ho_type;
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public String getHo_type() {
         return ho_type;
@@ -22,7 +31,15 @@ public class House {
     }
 
     public void setHo_state(int ho_state) {
+
         this.ho_state = ho_state;
+        if (ho_state==0)
+        {
+            this.flag = "未出租";
+        }
+        else{
+            this.flag = "出租";
+        }
     }
 
     public int getHo_id() {

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: asus1
@@ -49,6 +50,11 @@
                 <div class="alert alert-info">
                     请输入用户名和密码.
                 </div>
+                <c:if test="${requestScope.flag.equals('false')}">
+                    <div style="color: red">
+                        用户名或密码错误.
+                    </div>
+                </c:if>
                 <form data-toggle="validator" class="form-horizontal" action="adminServlet?method=login"  method="post">
                     <fieldset>
                         <div class="form-group col-md-12">
@@ -58,7 +64,6 @@
                             </div>
                             <!-- <span class="help-block with-errors"></span> -->
                         </div>
-
                         <div class="form-group col-md-12">
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>

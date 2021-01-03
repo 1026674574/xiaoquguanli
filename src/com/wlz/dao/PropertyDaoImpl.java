@@ -23,7 +23,7 @@ public class PropertyDaoImpl implements PropertyDao {
             String sql = "select * from property";
             if (id != 0)
             {
-                sql+=" where ho_id = "+id;
+                sql+=" where ho_id = "+id+" and po_state = 0";
             }
             preparedStatement = connection.prepareStatement(sql);
             resultSet=preparedStatement.executeQuery();
@@ -109,6 +109,21 @@ public class PropertyDaoImpl implements PropertyDao {
         preparedStatement.executeUpdate();
         preparedStatement.close();
         connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateProperty(int id) {
+        Connection connection = db.getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("update property set po_state = 1 where po_id = ?");
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

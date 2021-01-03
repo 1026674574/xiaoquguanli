@@ -100,4 +100,36 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public void deleteUser(int id) {
 
     }
+
+    @Override
+    public UserInfo login(String username, String password) {
+
+        Connection connection = db.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement("select * from userinfo where us_name = ? and  us_password = ?");
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
+            resultSet=preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+                UserInfo userInfo = new UserInfo();
+                userInfo.setUs_id(resultSet.getInt("us_id"));
+                userInfo.setHo_id(resultSet.getInt("ho_id"));
+                userInfo.setUs_name(resultSet.getString("us_name"));
+                userInfo.setUs_password(resultSet.getString("us_password"));
+                userInfo.setUs_truename(resultSet.getString("us_truename"));
+                userInfo.setUs_idcar(resultSet.getString("us_idcar"));
+                userInfo.setHouse(houseDao.getHouse(userInfo.getHo_id()));
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+                return userInfo;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

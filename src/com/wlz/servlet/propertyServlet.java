@@ -3,12 +3,14 @@ package com.wlz.servlet;
 import com.wlz.dao.PropertyDaoImpl;
 import com.wlz.dao.impl.PropertyDao;
 import com.wlz.model.Property;
+import com.wlz.model.UserInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -52,7 +54,13 @@ public class propertyServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/property_list.jsp").forward(request,response);
 
     }
-
+    protected void getList2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession session = request.getSession();
+        UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+        ArrayList<Property> list = propertyDao.getList(userInfo.getHo_id());
+        request.setAttribute("properties",list);
+        request.getRequestDispatcher("/WEB-INF/pages/user_property.jsp").forward(request,response);
+    }
     protected void getProperty(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Property property = propertyDao.getProperty(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("property",property);
@@ -69,5 +77,11 @@ public class propertyServlet extends HttpServlet {
         property.setPo_year(request.getParameter("year"));
         property.setPo_id(Integer.parseInt(request.getParameter("id")));
         propertyDao.updateProperty(property);
+    }
+    protected void updateProperty2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idstr = request.getParameter("id");
+        int id = Integer.parseInt(idstr);
+        propertyDao.updateProperty(id);
+        getList2(request,response);
     }
 }

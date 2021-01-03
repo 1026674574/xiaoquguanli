@@ -4,14 +4,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>物业缴费:物业管理系统</title>
+    <title>报修管理:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
     <link id="bs-css" href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet">
-
     <link href="${pageContext.request.contextPath}/css/charisma-app.css" rel="stylesheet">
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
@@ -36,7 +35,7 @@
     <![endif]-->
 
     <!-- The fav icon -->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico">
 
 </head>
 
@@ -51,13 +50,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.admin.ad_truename}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${admin.ad_truename}</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -81,8 +80,8 @@
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
                         <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                        <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
+                        <li class="active"><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
                         <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
                         <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
                         </li>
@@ -107,10 +106,10 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">首页</a>
+                        <a href="index.jsp">首页</a>
                     </li>
                     <li>
-                        <a href="house_list.html">物业缴费</a>
+                        <a href="main?action=maintainList">报修管理</a>
                     </li>
                 </ul>
             </div>
@@ -119,46 +118,58 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-list-alt"></i> 物业缴费</h2>
+                            <h2><i class="glyphicon glyphicon-wrench"></i> 报修管理</h2>
+
+                            <div class="box-icon">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a href="#" class="btn btn-close btn-round btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
                         </div>
                         <div class="box-content">
-
-                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable">
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                                 <thead>
-<%--                                <a class="btn btn-success" href="house/house-add.jsp">--%>
+<%--                                <a class="btn btn-success" href="maintain/maintain-add.jsp">--%>
 <%--                                    <i class="glyphicon glyphicon-plus icon-white"></i>--%>
-<%--                                    &ensp;添&ensp;加&ensp;记&ensp;录--%>
+<%--                                    &ensp;历&ensp;史&ensp;记&ensp;录--%>
 <%--                                </a>--%>
                                 <br/>
                                 <br/>
                                 <tr>
-                                    <th>房号</th>
-                                    <th>物业费</th>
-                                    <th>缴费开始时间</th>
-                                    <th>缴费截止时间</th>
-                                    <th>缴费状态</th>
+                                    <th>报修时间</th>
+                                    <th>报修情况</th>
+                                    <th>房间号</th>
+                                    <th>报修人</th>
+                                    <th>状态</th>
+                                    <th>处理人</th>
+                                    <th>处理结果</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="properties" items="${requestScope.properties}" >
+                                <c:forEach var="warranty" items="${requestScope.warrantys}" >
                                     <tr>
-                                        <td>${properties.house.ho_dong}-${properties.house.ho_dan}-${properties.house.ho_hao}</td>
-                                        <td>${properties.po_sevice}元</td>
-                                        <td>${properties.po_start}</td>
-                                        <td>${properties.po_end}</td>
-                                        <td>${properties.flag}</td>
+                                        <td>${warranty.wa_datetime}</td>
+                                        <td>${warranty.wa_text}</td>
+                                        <td>${warranty.userInfo.house.ho_dong}-${warranty.userInfo.house.ho_dan}-${warranty.userInfo.house.ho_hao}</td>
+                                        <td>${warranty.userInfo.us_truename}</td>
+                                        <td>${warranty.flag}</td>
+                                        <td>${warranty.admin.ad_truename}</td>
+                                        <td>${warranty.wa_back}</td>
                                         <td class="center">
-                                            <a class="btn btn-info" href="propertyServlet?method=getProperty">
-                                                编&ensp;辑
-                                            </a>
-                                            <a class="btn btn-danger" href="#" data-href="house?action=houseDelete&id=${house.id}" data-toggle="modal" data-target="#myModal">
+<%--                                            <a class="btn btn-info" href="warrantyServlet?method=getWarranty&id=${warranty.wa_id}">--%>
+<%--                                                <i class="glyphicon glyphicon-edit icon-white"></i>--%>
+<%--                                                处&ensp;理--%>
+<%--                                            </a>--%>
+                                            <a class="btn btn-danger" href="#" data-href="main?action=maintainDelete&id=${warranty.wa_id}" data-toggle="modal" data-target="#myModal">
+                                                <i class="glyphicon glyphicon-trash icon-white"></i>
                                                 删&ensp;除
                                             </a>
                                         </td>
                                     </tr>
                                 </c:forEach>
 
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -201,44 +212,44 @@
             Usman</a> 2012 - 2015</p>
 
         <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
-                href="http://usman.it/free-responsive-admin-template">WZL</a></p>
+                href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
     </footer>
 
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
 
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- library for cookie management -->
-<script src="js/jquery.cookie.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 <!-- calender plugin -->
-<script src='bower_components/moment/min/moment.min.js'></script>
-<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src='${pageContext.request.contextPath}/bower_components/moment/min/moment.min.js'></script>
+<script src='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
 <!-- data table plugin -->
-<script src="js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.dataTables.min.js"></script>
 <!-- select or dropdown enhancer -->
-<script src="bower_components/chosen/chosen.jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/chosen/chosen.jquery.min.js"></script>
 <!-- plugin for gallery image view -->
-<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/colorbox/jquery.colorbox-min.js"></script>
 <!-- notification plugin -->
-<script src="js/jquery.noty.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.noty.js"></script>
 <!-- library for making tables responsive -->
-<script src="bower_components/responsive-tables/responsive-tables.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/responsive-tables/responsive-tables.js"></script>
 <!-- tour plugin -->
-<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
 <!-- star rating plugin -->
-<script src="js/jquery.raty.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
 <!-- for iOS style toggle switch -->
-<script src="js/jquery.iphone.toggle.js"></script>
+<script src="${pageContext.request.contextPath}js/jquery.iphone.toggle.js"></script>
 <!-- autogrowing textarea plugin -->
-<script src="js/jquery.autogrow-textarea.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.autogrow-textarea.js"></script>
 <!-- multiple file upload plugin -->
-<script src="js/jquery.uploadify-3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.uploadify-3.1.min.js"></script>
 <!-- history.js for cross-browser state change on ajax -->
-<script src="js/jquery.history.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
-<script src="js/charisma.js"></script>
+<script src="${pageContext.request.contextPath}/js/charisma.js"></script>
 <script>
     $('#myModal').on('show.bs.modal', function(e) {
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));

@@ -173,7 +173,7 @@
                                         <td>${house.ho_dan}</td>
                                         <td>${house.ho_hao}</td>
                                         <td>${house.ho_area}</td>
-                                        <td>${house.ho_state}</td>
+                                        <td>${house.flag}</td>
                                         <td>${house.ho_type}</td>
                                         <td class="center">
                                             <a class="btn btn-info" href="houseServlet?method=getHouse&id=${house.ho_id}">

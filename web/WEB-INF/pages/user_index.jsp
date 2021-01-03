@@ -4,25 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <title>物业管理</title>
-    <link id="bs-css" href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet">
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
     <link href="${pageContext.request.contextPath}/css/charisma-app.css" rel="stylesheet">
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
     <link href='${pageContext.request.contextPath}/bower_components/chosen/chosen.min.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/bower_components/responsive-tables/responsive-tables.css'  type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' type="text/css"  rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/jquery.noty.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/noty_theme_default.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/elfinder.min.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/elfinder.theme.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/jquery.iphone.toggle.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/uploadify.css' type="text/css" rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/animate.min.css' type="text/css" rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/j query.noty.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/noty_theme_default.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/elfinder.min.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/elfinder.theme.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/uploadify.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/animate.min.css' rel='stylesheet'>
 </head>
 <body>
 <div class="navbar navbar-default" role="navigation">
-
     <div class="navbar-inner">
         <button type="button" class="navbar-toggle pull-left animated flip">
             <span class="sr-only">Toggle navigation</span>
@@ -30,13 +30,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.admin.ad_truename}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.userInfo.us_truename}</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -59,12 +59,9 @@
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li class="nav-header">功能</li>
-                        <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
-                        <li><a class="ajax-link" href="adminServlet?method=getAdminList"><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                        <li><a class="ajax-link" href="warrantyServlet?method=getList"><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="propertyServlet?method=getList"><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="houseServlet?method=getList"><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li class="active"><a class="ajax-link" href=""><span> &ensp;首&ensp;页</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList2"><span>&ensp;缴&ensp;费</span></a></li>
+                        <li><a class="ajax-link" href="warrantyServlet?method=getList2"><span> &ensp;报&ensp;修</span></a>
                         </li>
 
                     </ul>
@@ -89,7 +86,7 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.jsp">首页</a>
+                        <a href="usear_index.html">首页</a>
                     </li>
                 </ul>
             </div>
@@ -127,6 +124,15 @@
                                 <p>请在左侧选择您要进行的操作
                                     :)</p>
 
+                                <!--      <p><b>All pages in the menu are functional, take a look at all, please share this with your
+                                              followers.</b></p>   -->
+
+                                <!--    <p class="center-block download-buttons">
+                                       <a href="http://usman.it/free-responsive-admin-template/" class="btn btn-primary btn-lg"><i
+                                               class="glyphicon glyphicon-chevron-left glyphicon-white"></i> Back to article</a>
+                                       <a href="http://usman.it/free-responsive-admin-template/" class="btn btn-default btn-lg"><i
+                                               class="glyphicon glyphicon-download-alt"></i> Download Page</a>
+                                   </p> -->
                             </div>
                         </div>
                     </div>
@@ -161,7 +167,7 @@
             Usman</a> 2012 - 2015</p>
 
         <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
-                href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+                href="http://usman.it/free-responsive-admin-template">WZL</a></p>
     </footer>
 </div>
 </body>

@@ -129,16 +129,16 @@
                         <div class="box-content">
                             <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                                 <thead>
-                                <a class="btn btn-success" href="maintain/maintain-add.jsp">
+                                <a class="btn btn-success" href="warrantyServlet?method=getHistory">
                                     <i class="glyphicon glyphicon-plus icon-white"></i>
-                                    &ensp;添&ensp;加&ensp;记&ensp;录
+                                    &ensp;历&ensp;史&ensp;记&ensp;录
                                 </a>
                                 <br/>
                                 <br/>
                                 <tr>
                                     <th>报修时间</th>
-                                    <th>报修物品</th>
-                                    <th>房门号</th>
+                                    <th>报修情况</th>
+                                    <th>房间号</th>
                                     <th>报修人</th>
                                     <th>状态</th>
                                     <th>处理人</th>
@@ -153,7 +153,7 @@
                                         <td>${warranty.wa_text}</td>
                                         <td>${warranty.userInfo.house.ho_dong}-${warranty.userInfo.house.ho_dan}-${warranty.userInfo.house.ho_hao}</td>
                                         <td>${warranty.userInfo.us_truename}</td>
-                                        <td>${warranty.wa_state}</td>
+                                        <td>${warranty.flag}</td>
                                         <td>${warranty.admin.ad_truename}</td>
                                         <td>${warranty.wa_back}</td>
                                         <td class="center">

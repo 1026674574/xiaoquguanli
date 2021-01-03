@@ -48,17 +48,25 @@ public class adminServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/admin_list.jsp").forward(request,response);
     }
     protected void login(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
+        String usertype = request.getParameter("usertype");
+        if (usertype.equals("user"))
+        {
+            new userInfoServlet().login(request,response);
+            return;
+        }
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         Admin admin = adminDAO.login(username, password);
         if (admin==null)
         {
-           getPage(request,response);
+            request.setAttribute("flag","false");
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+            return;
         }
         HttpSession session = request.getSession();
         session.setAttribute("admin",admin);
-        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+        response.sendRedirect("/WEB-INF/pages/index.jsp");
 
     }
 }

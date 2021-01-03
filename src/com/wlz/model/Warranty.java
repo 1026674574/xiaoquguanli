@@ -10,6 +10,15 @@ public class Warranty {
     private String wa_back;
     private UserInfo userInfo;
     private Admin admin;
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public int getAd_id() {
         return ad_id;
@@ -75,6 +84,18 @@ public class Warranty {
 
     public void setWa_state(int wa_state) {
         this.wa_state = wa_state;
+        if (wa_state == 0)
+        {
+            setFlag("未处理");
+        }
+        else if (wa_state == 1)
+        {
+            setFlag("正在处理");
+        }
+        else
+        {
+            setFlag("已处理");
+        }
     }
 
     public String getWa_back() {

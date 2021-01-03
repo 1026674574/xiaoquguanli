@@ -10,7 +10,7 @@
     <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
-    <link id="bs-css" href="${pageContext.request.contextPath}/css/bootstrap-cerulean.min.css" rel="stylesheet">
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
 
     <link href="${pageContext.request.contextPath}/css/charisma-app.css" rel="stylesheet">
     <link href='${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
@@ -51,13 +51,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.admin.ad_truename}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">admin</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -79,12 +79,10 @@
 
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
-                        <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
-                        <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                        <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
+                        <li class="nav-header">功能</li>
+                        <li><a class="ajax-link" href="adminServlet?method=getPage&page=user_index"><span> &ensp;首&ensp;页</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList2"><span>&ensp;缴&ensp;费</span></a></li>
+                        <li class="active"><a class="ajax-link" href="warrantyServlet?method=getList2"><span> &ensp;报&ensp;修</span></a>
                         </li>
                     </ul>
                 </div>
@@ -107,10 +105,10 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">首页</a>
+                        <a href="usear_index.html">首页</a>
                     </li>
                     <li>
-                        <a href="house_list.html">物业缴费</a>
+                        <a href="usear_property_list.html">缴费</a>
                     </li>
                 </ul>
             </div>
@@ -119,20 +117,19 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-list-alt"></i> 物业缴费</h2>
+                            <h2>缴费</h2>
                         </div>
                         <div class="box-content">
 
                             <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable">
                                 <thead>
-<%--                                <a class="btn btn-success" href="house/house-add.jsp">--%>
-<%--                                    <i class="glyphicon glyphicon-plus icon-white"></i>--%>
-<%--                                    &ensp;添&ensp;加&ensp;记&ensp;录--%>
-<%--                                </a>--%>
+                                <a class="btn btn-success" href="house/house-add.jsp">
+                                    <i class="glyphicon glyphicon-plus icon-white"></i>
+                                    &ensp;历&ensp;史&ensp;记&ensp;录
+                                </a>
                                 <br/>
                                 <br/>
                                 <tr>
-                                    <th>房号</th>
                                     <th>物业费</th>
                                     <th>缴费开始时间</th>
                                     <th>缴费截止时间</th>
@@ -141,19 +138,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="properties" items="${requestScope.properties}" >
+                                <c:forEach var="property" items="${requestScope.properties}" >
                                     <tr>
-                                        <td>${properties.house.ho_dong}-${properties.house.ho_dan}-${properties.house.ho_hao}</td>
-                                        <td>${properties.po_sevice}元</td>
-                                        <td>${properties.po_start}</td>
-                                        <td>${properties.po_end}</td>
-                                        <td>${properties.flag}</td>
+                                        <td>${property.po_sevice}</td>
+                                        <td>${property.po_start}</td>
+                                        <td>${property.po_end}</td>
+                                        <td>${property.flag}</td>
                                         <td class="center">
-                                            <a class="btn btn-info" href="propertyServlet?method=getProperty">
-                                                编&ensp;辑
-                                            </a>
-                                            <a class="btn btn-danger" href="#" data-href="house?action=houseDelete&id=${house.id}" data-toggle="modal" data-target="#myModal">
-                                                删&ensp;除
+                                            <a class="btn btn-info" href="propertyServlet?method=updateProperty2&id=${property.po_id}">
+                                                缴&ensp;费
                                             </a>
                                         </td>
                                     </tr>
@@ -247,5 +240,6 @@
 
 </body>
 </html>
+
 
 

@@ -10,4 +10,5 @@ public interface UserInfoDao {
     ArrayList<UserInfo> getList();
     void updateUser(UserInfo userInfo);
     void deleteUser(int id);
+    UserInfo login(String username, String password);
 }

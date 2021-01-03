@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>物业缴费:物业管理系统</title>
+    <title>报修管理:物业管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
@@ -22,7 +22,7 @@
     <link href='${pageContext.request.contextPath}/css/jquery.noty.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/css/noty_theme_default.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/css/elfinder.min.css' rel='stylesheet'>
-    <link href='${pageContext.request.contextPath}/css/elfinder.theme.css' rel='stylesheet'>
+    <link href='${pageContext.request.contextPath}/css/elfinder.theme.css' rel='stylesheet'>、
     <link href='${pageContext.request.contextPath}/css/jquery.iphone.toggle.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/css/uploadify.css' rel='stylesheet'>
     <link href='${pageContext.request.contextPath}/css/animate.min.css' rel='stylesheet'>
@@ -43,7 +43,6 @@
 <body>
 <!-- topbar starts -->
 <div class="navbar navbar-default" role="navigation">
-
     <div class="navbar-inner">
         <button type="button" class="navbar-toggle pull-left animated flip">
             <span class="sr-only">Toggle navigation</span>
@@ -51,13 +50,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="${pageContext.request.contextPath}/img/logo20.png" class="hidden-xs"/>
             <span>物业管理系统</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">${sessionScope.admin.ad_truename}</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">admin</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -79,14 +78,10 @@
 
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
-                        <li><a class="ajax-link" href="index.jsp"><i class="glyphicon glyphicon-home"></i><span> &ensp;首&ensp;页</span></a>
-                        <li><a class="ajax-link" href="adminServlet?method=getAdminList"><i class="glyphicon glyphicon-cog"></i><span> &ensp;管&ensp;理&ensp;员&ensp;信&ensp;息</span></a>
-                        <li><a class="ajax-link" href="warrantyServlet?method=getList"><i class="glyphicon glyphicon-wrench"></i><span> &ensp;报&ensp;修&ensp;管&ensp;理</span></a>
-                        <li class="active"><a class="ajax-link" href="propertyServlet?method=getList"><i class="glyphicon glyphicon-user"></i><span> &ensp;缴&ensp;费&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="userInfoServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;业&ensp;主&ensp;管&ensp;理</span></a>
-                        <li><a class="ajax-link" href="houseServlet?method=getList"><i class="glyphicon glyphicon-list-alt"></i><span> &ensp;房&ensp;产&ensp;信&ensp;息</span></a>
-                        </li>
-                    </ul>
+                        <li class="nav-header">功能</li>
+                        <li><a class="ajax-link" href="adminServlet?method=getPage&page=user_index"><span> &ensp;首&ensp;页</span></a>
+                        <li><a class="ajax-link" href="propertyServlet?method=getList2"><span>&ensp;缴&ensp;费</span></a></li>
+                        <li class="active"><a class="ajax-link" href="warrantyServlet?method=getList2"><span> &ensp;报&ensp;修</span></a>                    </ul>
                 </div>
             </div>
         </div>
@@ -107,10 +102,10 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">首页</a>
+                        <a href="usear_index.html">首页</a>
                     </li>
                     <li>
-                        <a href="house_list.html">物业缴费</a>
+                        <a href="usear_maintain_list.html">报修</a>
                     </li>
                 </ul>
             </div>
@@ -119,46 +114,42 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well" data-original-title="">
-                            <h2><i class="glyphicon glyphicon-list-alt"></i> 物业缴费</h2>
+                            <h2> 报修</h2>
+
+                            <div class="box-icon">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a href="#" class="btn btn-close btn-round btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
                         </div>
                         <div class="box-content">
 
-                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable">
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                                 <thead>
-<%--                                <a class="btn btn-success" href="house/house-add.jsp">--%>
-<%--                                    <i class="glyphicon glyphicon-plus icon-white"></i>--%>
-<%--                                    &ensp;添&ensp;加&ensp;记&ensp;录--%>
-<%--                                </a>--%>
+                                <a class="btn btn-success" href="warrantyServlet?method=getPage&page=user_maintain_add">
+                                    &ensp;添&ensp;加&ensp;记&ensp;录
+                                </a>
                                 <br/>
                                 <br/>
                                 <tr>
-                                    <th>房号</th>
-                                    <th>物业费</th>
-                                    <th>缴费开始时间</th>
-                                    <th>缴费截止时间</th>
-                                    <th>缴费状态</th>
-                                    <th>操作</th>
+
+                                    <th>报修内容</th>
+                                    <th>是否处理</th>
+                                    <th>处理结果</th>
+                                    <th>处理人</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="properties" items="${requestScope.properties}" >
+                                <c:forEach var="warranty2" items="${requestScope.warrantys2}" >
                                     <tr>
-                                        <td>${properties.house.ho_dong}-${properties.house.ho_dan}-${properties.house.ho_hao}</td>
-                                        <td>${properties.po_sevice}元</td>
-                                        <td>${properties.po_start}</td>
-                                        <td>${properties.po_end}</td>
-                                        <td>${properties.flag}</td>
-                                        <td class="center">
-                                            <a class="btn btn-info" href="propertyServlet?method=getProperty">
-                                                编&ensp;辑
-                                            </a>
-                                            <a class="btn btn-danger" href="#" data-href="house?action=houseDelete&id=${house.id}" data-toggle="modal" data-target="#myModal">
-                                                删&ensp;除
-                                            </a>
-                                        </td>
+                                        <td>${warranty2.wa_text}</td>
+                                        <td>${warranty2.flag}</td>
+                                        <td>${warranty2.wa_back}</td>
+                                        <td>${warranty2.admin.ad_truename}</td>
                                     </tr>
                                 </c:forEach>
 
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -176,25 +167,6 @@
 
     <hr>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>确认？</h3>
-                </div>
-                <div class="modal-body">
-                    <p>此条记录将被永久删除</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
-                    <a class="btn btn-danger btn-ok">确认删除</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <footer class="row">
         <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://usman.it" target="_blank">Muhammad
